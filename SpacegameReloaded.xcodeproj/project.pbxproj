@@ -35,7 +35,7 @@
 		4F7BAEBE25912D1300A4D6B6 /* explosion.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = explosion.mp3; sourceTree = "<group>"; };
 		4F7BAEBF25912D1300A4D6B6 /* torpedo.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = torpedo.mp3; sourceTree = "<group>"; };
 		4F7BAEC725912F3500A4D6B6 /* MyParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyParticle.sks; sourceTree = "<group>"; };
-		4F7BAECA2591302D00A4D6B6 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spark.png; path = "Assets.xcassets/Particle Sprite Atlas.spriteatlas/spark.imageset/spark.png"; sourceTree = "<group>"; };
+		4F7BAECA2591302D00A4D6B6 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		4F7BAECD2591306400A4D6B6 /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Explosion.sks; sourceTree = "<group>"; };
 		4F7BAED0259130A400A4D6B6 /* Starfield.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Starfield.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -51,6 +51,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F3220942B3019CE00C9477E /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				4F7BAEAA25912C4800A4D6B6 /* GameScene.sks */,
+				4F7BAEAE25912C4800A4D6B6 /* GameScene.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		4F3220952B3019F600C9477E /* Emmitters */ = {
+			isa = PBXGroup;
+			children = (
+				4F7BAECD2591306400A4D6B6 /* Explosion.sks */,
+				4F7BAECA2591302D00A4D6B6 /* spark.png */,
+				4F7BAED0259130A400A4D6B6 /* Starfield.sks */,
+			);
+			path = Emmitters;
+			sourceTree = "<group>";
+		};
+		4F3220962B301A1F00C9477E /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				4F7BAEBE25912D1300A4D6B6 /* explosion.mp3 */,
+				4F7BAEBF25912D1300A4D6B6 /* torpedo.mp3 */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		4F7BAE9C25912C4800A4D6B6 = {
 			isa = PBXGroup;
 			children = (
@@ -71,18 +99,14 @@
 			isa = PBXGroup;
 			children = (
 				4F7BAEA825912C4800A4D6B6 /* AppDelegate.swift */,
-				4F7BAEAA25912C4800A4D6B6 /* GameScene.sks */,
-				4F7BAEAC25912C4800A4D6B6 /* Actions.sks */,
-				4F7BAECD2591306400A4D6B6 /* Explosion.sks */,
-				4F7BAECA2591302D00A4D6B6 /* spark.png */,
-				4F7BAED0259130A400A4D6B6 /* Starfield.sks */,
-				4F7BAEC725912F3500A4D6B6 /* MyParticle.sks */,
-				4F7BAEAE25912C4800A4D6B6 /* GameScene.swift */,
 				4F7BAEB025912C4800A4D6B6 /* GameViewController.swift */,
+				4F7BAEAC25912C4800A4D6B6 /* Actions.sks */,
 				4F7BAEB225912C4800A4D6B6 /* Main.storyboard */,
+				4F3220942B3019CE00C9477E /* Game */,
+				4F3220952B3019F600C9477E /* Emmitters */,
+				4F7BAEC725912F3500A4D6B6 /* MyParticle.sks */,
 				4F7BAEB525912C4B00A4D6B6 /* Assets.xcassets */,
-				4F7BAEBE25912D1300A4D6B6 /* explosion.mp3 */,
-				4F7BAEBF25912D1300A4D6B6 /* torpedo.mp3 */,
+				4F3220962B301A1F00C9477E /* Sounds */,
 				4F7BAEB725912C4B00A4D6B6 /* Info.plist */,
 			);
 			path = SpacegameReloaded;

@@ -10,6 +10,7 @@
 
 import SpriteKit
 import GameplayKit
+import CoreMotion
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
@@ -32,6 +33,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     let alienCategory:UInt32 = 0x1 << 1
     let photonTorpedoCategory:UInt32 = 0x1 << 0
+    
+    let motionManger = CMMotionManager()
+    var xAcceleration:CGFloat = 0
     
 
     override func didMove(to view: SKView) {
@@ -74,6 +78,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(scoreLabel)
         
         gameTimer = Timer.scheduledTimer(timeInterval: 0.75, target: self, selector: #selector(addAlien), userInfo: nil, repeats: true)
+        
+        
+        motionManger.accelerometerUpdateInterval = 0.2
+        motionManger.startAccelerometerUpdates(to: OperationQueue.current!) {(data: CMAccelerometerData?, error:Error? )in
+            if let acceleromrterData = data {
+                let acceleration = acceleromrterData.acceleration
+                self.xAcceleration = CGFloat(acceleration.x) * 0.75 + self.xAcceleration * 0.25
+            }
+        }
+        
         
         
     }
@@ -160,9 +174,51 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             secondBody = contact.bodyA
         }
         
+        if (firstBody.categoryBitMask & photonTorpedoCategory) != 0 && (secondBody.categoryBitMask & alienCategory) != 0 {
+            torpedoDidCollideWithAlien(torpedoNode: firstBody.node as! SKSpriteNode, alienNode: secondBody.node as! SKSpriteNode)
+        }
+        
+        
         
         
     }
+    
+    
+    func torpedoDidCollideWithAlien (torpedoNode:SKSpriteNode, alienNode:SKSpriteNode) {
+        
+        let explosion = SKEmitterNode(fileNamed: "Explosion")
+        explosion?.position = alienNode.position
+        self.addChild(explosion!)
+        self.run(SKAction.playSoundFileNamed("explosion.mp3", waitForCompletion: false))
+        
+        alienNode.removeFromParent()
+        torpedoNode.removeFromParent()
+        
+        
+        self.run(SKAction.wait(forDuration: 2)){
+            explosion?.removeFromParent()
+            
+        }
+        
+        score += 5
+    }
+    
+    
+    
+    
+   
+    override func didSimulatePhysics() {
+        player.position.x += xAcceleration * 50
+        
+        if player.position.x < -20 {
+            player.position = CGPoint(x: self.size.width + 20, y: player.position.y)
+        }else if player.position.x > self.size.width + 20{
+            player.position = CGPoint(x: -20, y: player.position.y)
+        }
+        
+    }
+    
+    
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
